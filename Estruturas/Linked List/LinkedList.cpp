@@ -58,7 +58,9 @@ void RemoveItem(node *list, int x){
 
 		if(pointer->next->i == x){
 			//encontrado
+			node *pre = pointer->next;
 			pointer->next = pointer->next->next;
+			free(pre);
 			cout << "Removido.\n\n";
 			return;
 		}
