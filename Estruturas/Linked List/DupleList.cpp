@@ -1,12 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define FALSE 0
+#define TRUE 1
+
 struct node
 {
 	int value;
 	node *previous;
 	node *next;
-}
+};
 
 void CreatList(node *head, node *back){
 	head = (node *) malloc(sizeof(node));
@@ -16,6 +19,34 @@ void CreatList(node *head, node *back){
 	head->next = back;
 	back->previous = head;
 	back->next = NULL;
+}
+
+bool AddItem(node *head, node *back, int x, int comando){
+	node *new_pointer = (node *) malloc(sizeof(node));
+	if(new_pointer == NULL) return FALSE;
+	new_pointer->value = x;
+
+	if(comando == 1){
+		new_pointer->next = head->next;
+		new_pointer->next->previous = new_pointer;
+		new_pointer->previous = head;
+		head->next = new_pointer;
+	}
+	else if(comando == 2){
+		new_pointer->next = back;
+		new_pointer->previous = back->previous;
+		new_pointer->previous->next = new_pointer;
+		back->previous = new_pointer;
+	}
+
+	return TRUE;
+}
+
+void PrintList(node *head, node *back){
+	node *pointer = head->next;
+	while(pointer->next != NULL){
+		cout << pointer->value << endl;
+	}
 }
 
 int main(){
@@ -31,10 +62,15 @@ int main(){
 		if(comando == 0) return 0;
 		else if(comando == 1){
 				
+			if(head->next->next == NULL);
 
 		}
 		else if(comando == 2){
 			
+			cout << "1- Inicio\n2- Fim\nComando: "; cin >> comando;
+			cout << "Digite o item: "; cin >> x;
+			AddItem(head, back, x, comando);
+			cout << "Sucess\n\n";
 
 		}
 		else if(comando == 3){
