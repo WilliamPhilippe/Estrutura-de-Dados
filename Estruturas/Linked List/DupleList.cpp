@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define FALSE 0
-#define TRUE 1
-
 struct node
 {
 	int value;
@@ -21,9 +18,9 @@ void CreatList(node *head, node *back){
 	back->next = NULL;
 }
 
-bool AddItem(node *head, node *back, int x, int comando){
+int AddItem(node *head, node *back, int x, int comando){
 	node *new_pointer = (node *) malloc(sizeof(node));
-	if(new_pointer == NULL) return FALSE;
+	if(new_pointer == NULL) return 0;
 	new_pointer->value = x;
 
 	if(comando == 1){
@@ -39,7 +36,7 @@ bool AddItem(node *head, node *back, int x, int comando){
 		back->previous = new_pointer;
 	}
 
-	return TRUE;
+	return 1;
 }
 
 void PrintList(node *head, node *back){
@@ -69,7 +66,7 @@ int main(){
 			
 			cout << "1- Inicio\n2- Fim\nComando: "; cin >> comando;
 			cout << "Digite o item: "; cin >> x;
-			AddItem(head, back, x, comando);
+			int test = AddItem(head, back, x, comando);
 			cout << "Sucess\n\n";
 
 		}
