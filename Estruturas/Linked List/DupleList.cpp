@@ -50,8 +50,6 @@ int RemoveItem(int x, SetList *lista){
 		lista->head = NULL;
 		lista->back = NULL;
 		free(currrent);
-
-		if(lista->head == NULL) cout << "ff\n";
 	}
 	else if(lista->head->value == x){
 		currrent = lista->head;
