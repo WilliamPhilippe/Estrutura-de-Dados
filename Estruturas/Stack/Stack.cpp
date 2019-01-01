@@ -58,11 +58,16 @@ int peek_elemment(SetStack *stack, int &x){
 	return 1;
 }
 
+int isempty(SetStack *stack){
+	if(stack->head == NULL) return 1;
+	else return 0;
+}
+
 int menu(SetStack *stack){
 
 	int x, command;
 
-	cout << "1 - Push Elemment.\n2 - Pop Elemment.\n3 - Peek Elemment.\n0 - Exit.\n";
+	cout << "1 - Push Elemment.\n2 - Pop Elemment.\n3 - Peek Elemment.\n4 - Is Empty?\n5 - Print Stack.\n0 - Exit.\n";
 	cout << "Insert command: "; cin >> command;
 
 	if(command == 0) return 0;
@@ -81,6 +86,9 @@ int menu(SetStack *stack){
 		else cout << "Elemment: " << c << endl << endl;
 	}
 	else if(command == 5) printstack(stack);
+	else if(command == 4){
+		isempty(stack) ? cout << "Empty.\n\n" : cout << "It isn't empty.\n\n";
+	}
 	else cout << "Invalid Command.\n\n";
 
 	return 1;
