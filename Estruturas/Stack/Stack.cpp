@@ -10,6 +10,7 @@ struct node
 struct SetStack
 {
 	node *head;
+	int size;
 };
 
 int push_elemment(SetStack *stack, int x){
@@ -17,6 +18,7 @@ int push_elemment(SetStack *stack, int x){
 	node *newPointer = (node *) malloc(sizeof(node));
 	if(newPointer == NULL) return 0;
 	newPointer->value = x;
+	stack->size ++;
 
 	if(stack->head == NULL){
 		stack->head = newPointer;
@@ -38,7 +40,7 @@ int remove_elemment(SetStack *stack){
 		stack->head = current->next;
 		free(current);
 	}
-
+	stack->size --;
 	return 1;
 }
 
@@ -67,7 +69,7 @@ int menu(SetStack *stack){
 
 	int x, command;
 
-	cout << "1 - Push Elemment.\n2 - Pop Elemment.\n3 - Peek Elemment.\n4 - Is Empty?\n5 - Print Stack.\n0 - Exit.\n";
+	cout << "1 - Push Elemment.\n2 - Pop Elemment.\n3 - Peek Elemment.\n4 - Is Empty?\n5 - Print Stack.\n6 - Size.\n0 - Exit.\n";
 	cout << "Insert command: "; cin >> command;
 
 	if(command == 0) return 0;
@@ -89,6 +91,7 @@ int menu(SetStack *stack){
 	else if(command == 4){
 		isempty(stack) ? cout << "Empty.\n\n" : cout << "It isn't empty.\n\n";
 	}
+	else if(command == 6) cout << stack->size << endl << endl;
 	else cout << "Invalid Command.\n\n";
 
 	return 1;
@@ -98,6 +101,7 @@ int main(){
 
 	SetStack *stack = (SetStack *) malloc(sizeof(SetStack));
 	stack->head = NULL;
+	stack->size = 0;
 
 	while(menu(stack));
 
