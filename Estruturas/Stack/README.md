@@ -10,4 +10,5 @@ Funções implementadas:
 	
 	Is empty (informa se a pilha está vazia)
 	
+	Size (retorna o numero de elementos na pilha)
 	
