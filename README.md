@@ -6,4 +6,4 @@ Algumas coisas de P2.
       QuickSort Genérico
       Lista Simples | Lista Duplamente Encadeada
       Pilha
-      ...fila... TERMINAR!
+      Fila
