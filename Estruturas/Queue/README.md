@@ -1,14 +1,16 @@
-PILHA
+FILA
 
 Funções implementadas:
 
-	Peek (retorna o elemento no topo da pilha)
+	PushItem. (adiciona item no início ou final)
 	
-	Poop (exclui o elemento no topo da pilha)
+	RemoveItem. (remove item no início ou final)
 	
-	Push (insere o elemento no topo da pilha)
+	GetItem (retorna o item no início ou final)
 	
-	Is empty (informa se a pilha está vazia)
+	Is empty (informa se a fila está vazia)
 	
-	Size (retorna o numero de elementos na pilha)
+	PrintQueue (printa a fila)
+	
+	Size (retorna o numero de elementos na fila)
 	
