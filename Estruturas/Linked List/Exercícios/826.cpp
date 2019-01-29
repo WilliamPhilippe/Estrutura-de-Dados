@@ -44,12 +44,17 @@ void AddItem(SetLista *lista, char cr){
 		lista->back = newNode;
 		newNode->pos = newNode->previous->pos + 1;
 
-		if(newNode->bin = '0'){
-			if(newNode->previous->bin = '1'){
 
+
+		if(newNode->bin == '0'){
+			if(newNode->previous->bin == '1'){
+				lista->posTempIni = newNode->pos;
+				lista->posTempFim = newNode->pos;
+				lista->tamTemp = 1;
 			}
 			else{
-
+				lista->posTempFim = newNode->pos;
+				lista->tamTemp ++;
 			}
 		}
 		else{
@@ -71,16 +76,18 @@ void AddItem(SetLista *lista, char cr){
 int main(){
 
 	char cr[10000];
-	SetLista *lista = SetarLista();
+	
 
 
 	while(1){
-		//gets(cr);
+		SetLista *lista = SetarLista();
+		gets(cr);
 		if(strlen(cr) <= 1) break;
 
-		for(int i = 0; cr[i] != '\n'; i++) AddItem(lista, cr[i]);
+		for(int i = 0; i < strlen(cr); i++) AddItem(lista, cr[i]);
 		AddItem(lista, '1');
 		cout << lista->posIni << " " << lista->posFim << endl;
+		free(lista);
 	}
 
 	return 0;	
