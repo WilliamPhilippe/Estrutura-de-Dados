@@ -42,12 +42,12 @@ int main(){
 	while(gets(command)){
 		cout << command << endl;
 
-		if(command == "PUSH"){
+		if(strcmp(command, "PUSH") == 0){
 			nodeStack *nodeNewStack = (nodeStack *) malloc(sizeof(nodeStack));
 			nodeNewStack->headList = NULL;
 
 			while(1){
-				cin >> x >> trash;
+				scanf("%d%c", &x, &trash);
 				pushList(nodeNewStack->headList, x);
 
 				if(trash == '\n') break;
@@ -55,7 +55,7 @@ int main(){
 
 			pushStack(stack, nodeNewStack); 
 		}
-		else if(command == "POP"){
+		else if(strcmp(command, "POP") == 0){
 
 		}
 		else{ cout << "error";  }
