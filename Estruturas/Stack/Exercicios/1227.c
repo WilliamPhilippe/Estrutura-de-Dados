@@ -65,7 +65,7 @@ STACK* Create_stack(){
 
 NODE* create_node(int element){
     NODE *newNode = (NODE *) malloc(sizeof(NODE));
-    newNode->element;
+    newNode->element = element;
     return newNode;
 }
 
@@ -76,9 +76,61 @@ int IS_EMPTY(STACK *stack){
 int POP(STACK *stack){
     
     NODE *current = stack->head;
-    if(current->next != NULL) stack->head = current->next;
-    else stack->head = NULL;
+    stack->head = stack->head->next;
     int x = current->element;
     free(current);
     return x;
+}
+
+void PUSH(STACK *stack, int element){
+
+    NODE *newNode = create_node(element);
+
+    if(stack->head == NULL){
+        stack->head = newNode;
+        newNode->next = NULL;
+    }
+    else{
+        newNode->next = stack->head;
+        stack->head = newNode;
+    }
+}
+
+void result(STACK *stack, char operation){
+
+    switch(operation){
+        case '0': PUSH(stack, 0); return;
+        case '1': PUSH(stack, 1); return;
+        case '2': PUSH(stack, 2); return;
+        case '3': PUSH(stack, 3); return;
+        case '4': PUSH(stack, 4); return;
+        case '5': PUSH(stack, 5); return;
+        case '6': PUSH(stack, 6); return;
+        case '7': PUSH(stack, 7); return;
+        case '8': PUSH(stack, 8); return;
+        case '9': PUSH(stack, 9); return;
+    }
+
+    int a = POP(stack);
+    int b = POP(stack);
+    int awser;
+
+    switch(operation){
+        case '+': awser = a+b; break;
+        case '*': awser = a*b; break;
+        case '/': awser = b/a; break;
+        case '-': awser = b-a; break;
+    }
+
+    PUSH(stack, awser);
+}
+
+void Calculadora(STACK* calculadora, int size){
+    int x; char c, h;
+    scanf("%c", &c);
+    int i;
+    for(i = 0; i < size; i++){
+        scanf("%c%c", &c, &h);
+        result(calculadora, c);
+    }
 }
