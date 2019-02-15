@@ -27,8 +27,8 @@ void returnTree(char *s, int *pos, nodeTree **no){
 		*no = newNode;
 
 
-		returnTree(s, pos, ((*no)->left) );
-		returnTree(s, pos, ((*no)->right) );
+		returnTree(s, pos, &((*no)->left) );
+		returnTree(s, pos, &((*no)->right) );
 		(*pos) ++;
 	}
 
@@ -47,7 +47,7 @@ int main(){
 	returnTree(s, &pos, &(root->right) );
 	
 
-	//cout << root->left->left->value;
+	cout << root->left->right->value;
 
 
 
