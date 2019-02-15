@@ -26,12 +26,23 @@ void returnTree(char *s, int *pos, nodeTree **no){
 		newNode->value = number;
 		*no = newNode;
 
+		cout << number << " ";
+
 
 		returnTree(s, pos, &((*no)->left) );
 		returnTree(s, pos, &((*no)->right) );
 		(*pos) ++;
 	}
 
+}
+
+void printInOrder(nodeTree *root){
+
+	if(root != NULL){
+		printInOrder(root->left);
+		cout << root->value << " ";
+		printInOrder(root->right);
+	}
 }
 
 int main(){
@@ -42,13 +53,11 @@ int main(){
 	nodeTree *root = (nodeTree *) malloc(sizeof(nodeTree));
 	int pos = 1;
 	root->value = returnNumber(s, &pos);
-
+	cout << root->value << " ";	
 	returnTree(s, &pos, &(root->left) );
 	returnTree(s, &pos, &(root->right) );
-	
-
-	cout << root->left->right->value;
-
+	cout << endl;
+	printInOrder(root);
 
 
 	return 0;
