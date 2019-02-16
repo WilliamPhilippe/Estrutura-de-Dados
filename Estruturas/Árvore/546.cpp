@@ -1,20 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 struct nodeTree{ int value; nodeTree *right, *left; };
+
+int toN(char *s){
+	int number = 0;;
+
+	for(int i = 0; s[i] != '\0'; i++) number = number * 10 + s[i] - 48;
+
+	return number;
+}
 
 int returnNumber(char *s, int *pos){
 	char toNumber[10000];
-	int i;
-	for(i = *pos; s[i] >= 48 && s[i] <= 57; i++){
-		toNumber[i - *pos] = s[i];
-		cout << toNumber[i - *pos];
-	}
-
-	// toNumber[i] = '\0';
+	int i, number = 0;
+	for(i = *pos; s[i] >= 48 && s[i] <= 57; i++) number = (number*10) + (s[i] - 48);
 	*pos = i;
-	cout  << /*<< atoi(toNumber) << */ " " << *pos << endl;
-	return atoi(toNumber);
+	return number;
 }
 
 void returnTree(char *s, int *pos, nodeTree **no){
@@ -27,9 +30,7 @@ void returnTree(char *s, int *pos, nodeTree **no){
 		nodeTree *newNode = (nodeTree *) malloc(sizeof(nodeTree));
 		newNode->value = number;
 		*no = newNode;
-
-		// cout << number << " ";
-
+		// cout << (*no)->value << " ";
 
 		returnTree(s, pos, &((*no)->left) );
 		returnTree(s, pos, &((*no)->right) );
@@ -38,14 +39,17 @@ void returnTree(char *s, int *pos, nodeTree **no){
 
 }
 
-void printInOrder(nodeTree *no){
+void printTree(nodeTree *no){
+	
+	nodeTree *current = no;
 
-	if(no != NULL){
-		printInOrder(no->left);
-		cout << no->value << " ";
-		printInOrder(no->right);
+	while(current != NULL){
+		cout << current->value;
+		current = current->left;
 	}
+
 }
+
 
 int main(){
 	
@@ -55,13 +59,11 @@ int main(){
 	nodeTree *root = (nodeTree *) malloc(sizeof(nodeTree));
 	int pos = 1;
 	root->value = returnNumber(s, &pos);
-	// cout << root->value << " ";	
+
 	returnTree(s, &pos, &(root->left) );
 	returnTree(s, &pos, &(root->right) );
-	cout << endl;
-	// printInOrder(root);
-	// cout << root->right->left->value;
-
+	
+	printTree(root);
 
 	return 0;
 }
