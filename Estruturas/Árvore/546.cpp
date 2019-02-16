@@ -48,18 +48,49 @@ void dfs(nodeTree *node, int v, int *p, int pTemp){
 	}
 }
 
+void ler(char *s){
+	char x;
+	int i = 0;
+	while(cin >> x) if(x != ' ') s[i++] = x;
+	s[i] = '\0';
+}
+
+void printTree(nodeTree *no){
+	if(no != NULL){
+		printTree(no->left);
+		cout << no->value << " ";
+		printTree(no->right);
+	}
+}
+
+void verify(nodeTree *no, int *flag, int *vetor, int pos){
+	if(no == NULL || flag == 0) return;
+	else{
+
+		if(no->left != NULL && no->left->value > no->value){ *flag = 0; return; }
+		else if(no->right != NULL && no->right->value < no->value){ *flag = 0; return; }
+		else{
+			verify(no->left, flag, vetor, pos + 1);
+			verify(no->right, flag, vetor, pos + 1);
+		}
+
+	}
+}
+
 int main(){
 	
-	char s[100000]; gets(s);
+	char *s = (char *) malloc(sizeof(char) * 10000);
+	ler(s);
 	int no; cin >> no;
 
 	nodeTree *root = returnTree(s);
+	
+	int flag = 1;
+	int vetor[1000];
+	vetor[0] = root->value;
+	verify(root, &flag, vetor, 1);
 
-	int p = -1;
-	dfs(root, no, &p, 0);
-
-	if(p == -1) cout << "NAO ESTA NA ARVORE\n" << -1 << endl;
-	else cout << "ESTA NA ARVORE\n" << p << endl;
+	flag ? cout << "VERDADEIRO" << endl : cout << "FALSO" << endl;
 
 	return 0;
 }
