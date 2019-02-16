@@ -8,10 +8,12 @@ int returnNumber(char *s, int *pos){
 	int i;
 	for(i = *pos; s[i] >= 48 && s[i] <= 57; i++){
 		toNumber[i - *pos] = s[i];
+		cout << toNumber[i - *pos];
 	}
 
-	toNumber[i] = '\0';
+	// toNumber[i] = '\0';
 	*pos = i;
+	cout  << /*<< atoi(toNumber) << */ " " << *pos << endl;
 	return atoi(toNumber);
 }
 
@@ -26,7 +28,7 @@ void returnTree(char *s, int *pos, nodeTree **no){
 		newNode->value = number;
 		*no = newNode;
 
-		cout << number << " ";
+		// cout << number << " ";
 
 
 		returnTree(s, pos, &((*no)->left) );
@@ -36,12 +38,12 @@ void returnTree(char *s, int *pos, nodeTree **no){
 
 }
 
-void printInOrder(nodeTree *root){
+void printInOrder(nodeTree *no){
 
-	if(root != NULL){
-		printInOrder(root->left);
-		cout << root->value << " ";
-		printInOrder(root->right);
+	if(no != NULL){
+		printInOrder(no->left);
+		cout << no->value << " ";
+		printInOrder(no->right);
 	}
 }
 
@@ -53,11 +55,12 @@ int main(){
 	nodeTree *root = (nodeTree *) malloc(sizeof(nodeTree));
 	int pos = 1;
 	root->value = returnNumber(s, &pos);
-	cout << root->value << " ";	
+	// cout << root->value << " ";	
 	returnTree(s, &pos, &(root->left) );
 	returnTree(s, &pos, &(root->right) );
 	cout << endl;
-	printInOrder(root);
+	// printInOrder(root);
+	// cout << root->right->left->value;
 
 
 	return 0;
