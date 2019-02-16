@@ -1,19 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 struct nodeTree{ int value; nodeTree *right, *left; };
 
-int toN(char *s){
-	int number = 0;;
-
-	for(int i = 0; s[i] != '\0'; i++) number = number * 10 + s[i] - 48;
-
-	return number;
-}
-
 int returnNumber(char *s, int *pos){
-	char toNumber[10000];
 	int i, number = 0;
 	for(i = *pos; s[i] >= 48 && s[i] <= 57; i++) number = (number*10) + (s[i] - 48);
 	*pos = i;
@@ -30,7 +20,6 @@ void returnTree(char *s, int *pos, nodeTree **no){
 		nodeTree *newNode = (nodeTree *) malloc(sizeof(nodeTree));
 		newNode->value = number;
 		*no = newNode;
-		// cout << (*no)->value << " ";
 
 		returnTree(s, pos, &((*no)->left) );
 		returnTree(s, pos, &((*no)->right) );
@@ -39,31 +28,38 @@ void returnTree(char *s, int *pos, nodeTree **no){
 
 }
 
-void printTree(nodeTree *no){
-	
-	nodeTree *current = no;
-
-	while(1){
-		if(current->value == 1 && current->right == NULL){ cout << "x"; return; }
-		current = current->right;
-	}
-
-}
-
-
-int main(){
-	
-	char s[100000]; gets(s);
-	int no; cin >> no;
-
+nodeTree *returnTree(char *s){
 	nodeTree *root = (nodeTree *) malloc(sizeof(nodeTree));
 	int pos = 1;
 	root->value = returnNumber(s, &pos);
 
 	returnTree(s, &pos, &(root->left) );
 	returnTree(s, &pos, &(root->right) );
+
+	return root;
+}
+
+void dfs(nodeTree *node, int v, int *p, int pTemp){
+	if(node == NULL) return;
+	else if(node->value == v) { *p = pTemp; return; }
+	else{
+		dfs(node->left, v, p, pTemp + 1);
+		dfs(node->right, v, p, pTemp + 1);
+	}
+}
+
+int main(){
 	
-	printTree(root);
+	char s[100000]; gets(s);
+	int no; cin >> no;
+
+	nodeTree *root = returnTree(s);
+
+	int p = -1;
+	dfs(root, no, &p, 0);
+
+	if(p == -1) cout << "NAO ESTA NA ARVORE\n" << -1 << endl;
+	else cout << "ESTA NA ARVORE\n" << p << endl;
 
 	return 0;
 }
