@@ -22,7 +22,7 @@ int returnNumber(char *s, int *pos){
 
 void returnTree(char *s, int *pos, nodeTree **no){
 
-	if(s[*pos] == '(' && s[*pos + 1] == ')'){ (*pos) += 2; no = NULL; return; }
+	if(s[*pos] == '(' && s[*pos + 1] == ')'){ (*pos) += 2; *no = NULL; return; }
 	else if(s[*pos] == ')'){ (*pos) ++; return; }
 	else{
 		(*pos) ++;
@@ -43,9 +43,9 @@ void printTree(nodeTree *no){
 	
 	nodeTree *current = no;
 
-	while(current != NULL){
-		cout << current->value;
-		current = current->left;
+	while(1){
+		if(current->value == 1 && current->right == NULL){ cout << "x"; return; }
+		current = current->right;
 	}
 
 }
