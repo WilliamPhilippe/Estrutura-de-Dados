@@ -1,16 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_SIZE 15000
+#define MAX_SIZE 10000
 
 struct HeapNode { int first, second; };
 struct HeapSet {int size; HeapNode data[MAX_SIZE]; };
-struct VNode {int first, second; VNode *next, *previous; };
-struct SetList { VNode *back, *head; };
 
 int *distancia = (int *) malloc(sizeof(MAX_SIZE));
 int *processado = (int *) malloc(sizeof(MAX_SIZE));
-SetList vizinhos[MAX_SIZE];
 
 int GP(int i) { return i / 2; }
 int GL(int i) { return i * 2; }
@@ -69,16 +66,27 @@ void dequeue(HeapSet *heap){
 
 HeapNode peek(HeapSet *heap) { return heap->data[1]; }
 
-void PushItem(SetList *lista, int first, int second){
+// ^ --------- HEAP ---------- ^
+// v --------- LIST ---------- v
 
-	VNode *newPointer = (VNode *) malloc(sizeof(VNode));
+struct nodeV {int first, second; nodeV *next, *previous; };
+struct SetList { nodeV *back, *head; };
+
+void SETAR(int n, SetList *vizinhos){
+	 for(int i = 0; i <= n + 5; i++){ distancia[i] = INT_MAX; processado[i] = 0; }
+	 for(int i = 0; i < n + 3; i++) { vizinhos[i].head = NULL; vizinhos[i].back = NULL; }
+}
+
+nodeV *GetItem(SetList *lista) { return lista->head; }
+
+void PushItem(SetList *lista, int first, int second){
+	nodeV *newPointer = (nodeV *) malloc(sizeof(nodeV));
 	newPointer->first = first; newPointer->second = second;
 
 	if(lista->head == NULL){
 		lista->head = newPointer;
-		lista->back = newPointer;
-		newPointer->previous = NULL;
-		newPointer->next = NULL;
+		lista->head = newPointer;
+		newPointer->next = newPointer->previous = NULL;
 	}
 	else{
 		newPointer->next = NULL;
@@ -86,26 +94,20 @@ void PushItem(SetList *lista, int first, int second){
 		lista->back->next = newPointer;
 		lista->back = newPointer;
 	}
-}
 
-VNode *GetItem(SetList *lista) { return lista->head; }
-
-void SETAR(int n){
-	 for(int i = 0; i <= n + 5; i++){ distancia[i] = INT_MAX; processado[i] = 0; }
-	 for(int i = 0; i <= n + 5; i++) { vizinhos[i].head = vizinhos[i].back = NULL; }
 }
 
 int main(){
 
 	int n, m, u, v, d;
 	cin >> n >> m;
-	SETAR(n);
+	SetList vizinhos[n + 5];
+	SETAR(n, vizinhos);
 
 	for(int i = 0; i < m; i++){
 		cin >> u >> v >> d;
-
-		PushItem(&vizinhos[u], d, v);
-		PushItem(&vizinhos[v], d, u);
+		PushItem( &vizinhos[u], d, v);
+		PushItem( &vizinhos[v], d, u);
 	}
 
 	cout << "ok";
