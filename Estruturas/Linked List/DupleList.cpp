@@ -31,7 +31,7 @@ int AddItem(int x, int command, SetList *lista){
 		newPointer->previous = NULL;
 	}
 	else if(command == 2){
-		newPointer->next == NULL;
+		newPointer->next = NULL;
 		newPointer->previous = lista->back;
 		lista->back->next = newPointer;
 		lista->back = newPointer;
