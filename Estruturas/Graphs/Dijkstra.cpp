@@ -6,8 +6,8 @@ using namespace std;
 struct HeapNode { int first, second; };
 struct HeapSet {int size; HeapNode data[MAX_SIZE]; };
 
-int *distancia = (int *) malloc(sizeof(MAX_SIZE));
-int *processado = (int *) malloc(sizeof(MAX_SIZE));
+int *distancia = (int *) malloc(sizeof(int) * MAX_SIZE);
+int *processado = (int *) malloc(sizeof(int) * MAX_SIZE);
 
 int GP(int i) { return i / 2; }
 int GL(int i) { return i * 2; }
@@ -85,7 +85,7 @@ void PushItem(SetList *lista, int first, int second){
 
 	if(lista->head == NULL){
 		lista->head = newPointer;
-		lista->head = newPointer;
+		lista->back = newPointer;
 		newPointer->next = newPointer->previous = NULL;
 	}
 	else{
@@ -94,7 +94,51 @@ void PushItem(SetList *lista, int first, int second){
 		lista->back->next = newPointer;
 		lista->back = newPointer;
 	}
+}
 
+void dijkstra(SetList *vizinhos, int x){
+	distancia[x] = 0;
+
+	HeapSet *fila = CreateHeap();
+	enqueue(fila, distancia[x], x);
+
+	while(true){
+		int davez = -1;
+
+		while(!IsEmpty(fila)){
+			int atual = (peek(fila)).second;
+			dequeue(fila);
+			davez = atual;
+		}
+
+		if(davez == -1) return;
+
+		nodeV *currrent = vizinhos[davez].head;
+
+		while(currrent != NULL){
+			int dist = currrent->first;
+			int atual = currrent->second;
+
+			if( distancia[atual] > distancia[davez] + dist ){
+				distancia[atual] = distancia[davez] + dist;
+				enqueue(fila, distancia[atual], atual);
+			}
+
+			currrent = currrent->next;
+		}
+	}
+}
+
+int PrintList(SetList *lista){
+	nodeV *currrent = lista->head;
+	if(lista->head == NULL || lista->back == NULL) return 0;
+
+	while(currrent != NULL){
+		cout << currrent->first << " | " << currrent->second << endl;
+		currrent = currrent->next;
+	}
+
+	return 1;
 }
 
 int main(){
@@ -109,6 +153,9 @@ int main(){
 		PushItem( &vizinhos[u], d, v);
 		PushItem( &vizinhos[v], d, u);
 	}
+
+	dijkstra(vizinhos, 1);
+	cout << distancia[n] << endl;
 
 	cout << "ok";
 
