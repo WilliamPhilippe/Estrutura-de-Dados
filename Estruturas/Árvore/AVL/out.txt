@@ -1,0 +1,54 @@
+----
+Adicionando 40
+Continuou AVL...
+   ( 40  ()  () ) 
+----
+Adicionando 10
+Continuou AVL...
+   ( 40  ( 10  ()  () )  () ) 
+----
+Adicionando 20
+Antes de ajustar balanceamento...
+   ( 40  ( 10  ()  ( 20  ()  () ) )  () ) 
+Depois de ajustar balanceamento...
+   ( 20  ( 10  ()  () )  ( 40  ()  () ) ) 
+----
+Adicionando 30
+Continuou AVL...
+   ( 20  ( 10  ()  () )  ( 40  ( 30  ()  () )  () ) ) 
+----
+Adicionando 12
+Continuou AVL...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 40  ( 30  ()  () )  () ) ) 
+----
+Adicionando 35
+Antes de ajustar balanceamento...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 40  ( 30  ()  ( 35  ()  () ) )  () ) ) 
+Depois de ajustar balanceamento...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 30  ()  () )  ( 40  ()  () ) ) ) 
+----
+Adicionando 25
+Continuou AVL...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 30  ( 25  ()  () )  () )  ( 40  ()  () ) ) ) 
+----
+Adicionando 28
+Antes de ajustar balanceamento...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 30  ( 25  ()  ( 28  ()  () ) )  () )  ( 40  ()  () ) ) ) 
+Depois de ajustar balanceamento...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 28  ( 25  ()  () )  ( 30  ()  () ) )  ( 40  ()  () ) ) ) 
+----
+Adicionando 390
+Continuou AVL...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 28  ( 25  ()  () )  ( 30  ()  () ) )  ( 40  ()  ( 390  ()  () ) ) ) ) 
+----
+Adicionando 120
+Antes de ajustar balanceamento...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 28  ( 25  ()  () )  ( 30  ()  () ) )  ( 40  ()  ( 390  ( 120  ()  () )  () ) ) ) ) 
+Depois de ajustar balanceamento...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 28  ( 25  ()  () )  ( 30  ()  () ) )  ( 120  ( 40  ()  () )  ( 390  ()  () ) ) ) ) 
+----
+Adicionando 200
+Antes de ajustar balanceamento...
+   ( 20  ( 10  ()  ( 12  ()  () ) )  ( 35  ( 28  ( 25  ()  () )  ( 30  ()  () ) )  ( 120  ( 40  ()  () )  ( 390  ( 200  ()  () )  () ) ) ) ) 
+Depois de ajustar balanceamento...
+   ( 35  ( 20  ( 10  ()  ( 12  ()  () ) )  ( 28  ( 25  ()  () )  ( 30  ()  () ) ) )  ( 120  ( 40  ()  () )  ( 390  ( 200  ()  () )  () ) ) ) 
