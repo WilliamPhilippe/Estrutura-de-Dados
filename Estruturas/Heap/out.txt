@@ -1,0 +1,29 @@
+Estado inicial: 27 | 17 | 3 | 16 | 13 | 10 | 1 | 5 | 7 | 12 | 4 | 8 | 9 | 0
+Estado Atual da Heap: 27 | 17 | 10 | 16 | 13 | 9 | 1 | 5 | 7 | 12 | 4 | 3 | 8 | 0
+Maior elemento neste passo: 27
+Estado Atual da Heap: 17 | 16 | 10 | 7 | 13 | 9 | 1 | 5 | 0 | 12 | 4 | 3 | 8
+Maior elemento neste passo: 17
+Estado Atual da Heap: 16 | 13 | 10 | 7 | 12 | 9 | 1 | 5 | 0 | 8 | 4 | 3
+Maior elemento neste passo: 16
+Estado Atual da Heap: 13 | 12 | 10 | 7 | 8 | 9 | 1 | 5 | 0 | 3 | 4
+Maior elemento neste passo: 13
+Estado Atual da Heap: 12 | 8 | 10 | 7 | 4 | 9 | 1 | 5 | 0 | 3
+Maior elemento neste passo: 12
+Estado Atual da Heap: 10 | 8 | 9 | 7 | 4 | 3 | 1 | 5 | 0
+Maior elemento neste passo: 10
+Estado Atual da Heap: 9 | 8 | 3 | 7 | 4 | 0 | 1 | 5
+Maior elemento neste passo: 9
+Estado Atual da Heap: 8 | 7 | 3 | 5 | 4 | 0 | 1
+Maior elemento neste passo: 8
+Estado Atual da Heap: 7 | 5 | 3 | 1 | 4 | 0
+Maior elemento neste passo: 7
+Estado Atual da Heap: 5 | 4 | 3 | 1 | 0
+Maior elemento neste passo: 5
+Estado Atual da Heap: 4 | 1 | 3 | 0
+Maior elemento neste passo: 4
+Estado Atual da Heap: 3 | 1 | 0
+Maior elemento neste passo: 3
+Estado Atual da Heap: 1 | 0
+Maior elemento neste passo: 1
+Estado Atual da Heap: 0
+Resultado Final: 0 | 1 | 3 | 4 | 5 | 7 | 8 | 9 | 10 | 12 | 13 | 16 | 17 | 27
