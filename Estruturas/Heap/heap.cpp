@@ -68,6 +68,12 @@ void printarHeap(HeapSet *heap){
 	cout << endl;
 }
 
+void maxheap(HeapSet *heap){
+	int l = heap->size;
+	for(int i = l/2; i >= 1; i--) MaxHeapfy(heap, i);
+}
+
+
 void heapsort(HeapSet *heap){
 	for(int i = heap->size; i >= 2; i--){
 		int aux = heap->data[1];
@@ -83,14 +89,19 @@ void heapsort(HeapSet *heap){
 
 int main(){
 	HeapSet *heap = CreateHeap();
-	int x, count = 0;
+	int x, count = 0;	
 	int start[10000];
-	while(cin >> x) start[count++] = x, enqueue(heap, x);
+	while(cin >> x) start[count++] = x, heap->data[++heap->size] = x;
+
+
 
 	cout << "Estado inicial: " << start[0];
 	for(int i = 1; i < count; i++) cout << " | " << start[i];
 	cout << endl;
+	maxheap(heap);
 	printarHeap(heap);
+
+	
 	heapsort(heap);
 
 	cout << "Resultado Final: " << heap->data[1];
