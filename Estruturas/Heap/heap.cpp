@@ -61,13 +61,6 @@ void dequeue(HeapSet *heap){
 
 int peek(HeapSet *heap) { return heap->data[1]; }
 
-void printarHeap(HeapSet *heap){
-	cout << "Estado Atual da Heap: " << heap->data[1];
-	for(int i = 2; i <= heap->size; i++) cout << " | " << heap->data[i];
-	if(heap->size > 1) cout << "\nMaior elemento neste passo: " << heap->data[1];
-	cout << endl;
-}
-
 void maxheap(HeapSet *heap){
 	int l = heap->size;
 	for(int i = l/2; i >= 1; i--) MaxHeapfy(heap, i);
@@ -90,24 +83,8 @@ void heapsort(HeapSet *heap){
 int main(){
 	HeapSet *heap = CreateHeap();
 	int x, count = 0;	
-	int start[10000];
-	while(cin >> x) start[count++] = x, heap->data[++heap->size] = x;
-
-
-
-	cout << "Estado inicial: " << start[0];
-	for(int i = 1; i < count; i++) cout << " | " << start[i];
-	cout << endl;
+	while(cin >> x) heap->data[++heap->size] = x;
 	maxheap(heap);
-	printarHeap(heap);
-
-	
 	heapsort(heap);
-
-	cout << "Resultado Final: " << heap->data[1];
-	for(int i = 2; i <= count; i++) cout << " | " << heap->data[i];
-
-
-
 	return 0;
 }
