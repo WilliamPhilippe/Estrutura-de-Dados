@@ -1,8 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define MAXSIZE 300
+#define MAXSIZE 2500
 
-int matrix[300][300];
+int matrix[MAXSIZE][MAXSIZE];
+int distancia[MAXSIZE];
+int ant[MAXSIZE];
+int process[MAXSIZE];
+int v, a, t;
 
 struct node{ int value; node *next, *previous; };
 struct SetQueue{ node *head; node *back; int size; };
@@ -68,11 +72,98 @@ void printQueue(SetQueue *fila){
 	}
 }
 
-// ^^ ---------- QUEUE ---------- ^^ \\
+// ^^ ---------- QUEUE ---------- ^^ 
+// vv ---------- GRAPH ---------- vv 
+
+void iniciar(){	for(int i = 0; i < MAXSIZE; i++){ distancia[i] = -1; ant[i] = -1; process[i] = 0; } }
+
+void bfs(int no, int final){
+
+	SetQueue *fila = CreateQueue();
+	enqueueQ(fila, no);
+	distancia[no] = 0;
+
+	while(true){
+		int emp = 0; int next = 0;
+
+		while(sizeQ(fila)){
+			next = getQ(fila);
+			dequeueQ(fila);
+
+			if(!process[next]){
+				process[next] = 1;
+				emp = 1;
+				break;
+			}
+		}
+
+		if(!emp) break;
+		cout << "Iniciando busca em largura a partir de " << next << endl;
+		for(int i = 0; i < v; i++){
+
+			if(matrix[next][i] && !process[i] && distancia[i] < 1){
+				distancia[i] = distancia[next] + 1;
+				ant[i] = next;
+				enqueueQ(fila, i);
+			}
+		}
+	}
+}
+
+void ImprimirDist(int x){
+	for(int i = 0; i < v; i++){
+		cout << i << " | ";
+		if(distancia[i] >= 0 && i != x) cout << distancia[i] << " | " << ant[i] << endl;
+		else if(i == x) cout << "0 | -\n";
+		else cout << "- | -\n";
+	}
+}
+
+void PrintCaminho(int x, int y){
+	if(ant[y] == -1) cout << y;
+	else{
+		PrintCaminho(x, ant[y]);
+		cout << " => " << y;
+	}
+
+
+}
 
 int main(){
 
-	int v, a, t;
+	cin >> v >> a >> t;
+	int x, y;
+
+	for(int i = 0; i < v + 1; i++) for(int j = 0; j < v + 1; j++) matrix[i][j] = 0;
+
+	for(int i = 0; i < a; i++){
+		cin >> x >> y;
+		matrix[x][y] = 1;
+	}
+
+	cout << "--------";
+	for(int i = 1; i <= t; i++){
+		iniciar();
+		cin >> x >> y;
+		cout << "\n\n" << "Caso de Teste #" << i << " - BFS(" << x << ")\n\n";
+
+		bfs(x, y);
+		cout << endl;
+		ImprimirDist(x);
+		cout << endl;
+
+		if(distancia[y] >= 0){
+				cout << "Caminho entre " << x << " e " << y << ": ";
+				PrintCaminho(x, y);
+		}
+		else cout << "Sem caminho entre " << x << " e " << y;
+
+		cout << endl << endl;
+		cout << "--------";
+	}
+
+	
+
 
 	return 0;
 }
